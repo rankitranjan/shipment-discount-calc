@@ -37,6 +37,11 @@ To Run a single file test, issue
 ```bash
 rake test TEST=test/transaction_test.rb    
 ```
+
+## Architecture overview
+
+<img width="579" alt="Screenshot 2021-07-01 at 08 27 19" src="https://user-images.githubusercontent.com/10682375/124058029-382d7080-da46-11eb-9f27-2dcf5751c1d3.png">
+
 ### To add a new rule.
 
 Go to `lib/rule_sets.rb`
