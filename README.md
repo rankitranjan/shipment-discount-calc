@@ -50,3 +50,8 @@ add new rule there and call the rule inside `price/discount.rb` wilth required p
 
 Price::Discount.apply_rules_and_get_discount_price
 
+### Extra Info
+there is two `.txt` file inside project 
+1. `shipping_charges_data_set.txt` holds is shipment package price and
+2. `input.txt` hold the input in `date, size, and carrier`
+
