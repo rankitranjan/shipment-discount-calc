@@ -44,7 +44,7 @@ class RuleSetTest < Minitest::Test
   end
 
   def update_tracker_data(prices, input)
-    @tracker_data.push(Transaction.new.update_tracker(prices, input))
+    @tracker_data.push(Transaction.new.send(:update_tracker, prices, input))
   end
 
   def call_service(line)

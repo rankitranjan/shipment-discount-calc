@@ -2,6 +2,7 @@
 
 require 'minitest/autorun'
 require_relative '../../lib/output'
+require 'logger'
 
 class OutputTest < Minitest::Test
   include Output
@@ -20,14 +21,5 @@ class OutputTest < Minitest::Test
     expected = '2015-02-01 S MR Ignored'
 
     assert_equal dispaly_error_output(data, ignored), expected
-  end
-
-  def test_display
-    data = %w[2015-02-01 S MR]
-    new_price = %w[1.50 0.50]
-    expected = '2015-02-01 S MR 1.50 0.50'
-    to_display = dispaly_output(data.join(' '), new_price.map(&:to_f))
-
-    assert_equal display(to_display), expected
   end
 end

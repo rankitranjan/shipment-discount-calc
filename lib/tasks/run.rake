@@ -11,6 +11,7 @@ task :run do
   ReadInputFile.start(file)
 end
 
+# Just a supported wrapper class to call the Transaction to process the file.
 class ReadInputFile
   include ProcessFile
 

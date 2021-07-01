@@ -20,6 +20,9 @@ module RuleSets
   end
 
   # Other rules will go here
+
+  private
+
   def get_month(date)
     Date.parse(date).month
   end

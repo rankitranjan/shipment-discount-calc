@@ -15,7 +15,7 @@ module Price
 
     def test_calculate_price
       discount = Price::Discount.new(LINE, [])
-      discount_price = discount.apply_rules_and_get_discount_price
+      discount_price = discount.send(:apply_rules_and_get_discount_price)
       reduced_price, discount = discount.calculate_price(discount_price)
 
       assert_equal reduced_price, 1.5
@@ -24,8 +24,8 @@ module Price
 
     def test_final_discount_price
       discount = Price::Discount.new(LINE, [])
-      expected_discount_price = discount.apply_rules_and_get_discount_price
-      final_discount = final_discount_price(expected_discount_price, discount.total_discount_given_in_month)
+      expected_discount_price = discount.send(:apply_rules_and_get_discount_price)
+      final_discount = send(:final_discount_price, expected_discount_price, discount.send(:total_discount_given_in_month))
 
       assert_equal final_discount, expected_discount_price
     end
@@ -33,7 +33,7 @@ module Price
     def test_total_discount_given_in_month
       discount = Price::Discount.new(LINE, [])
 
-      assert_equal discount.total_discount_given_in_month, 0
+      assert_equal discount.send(:total_discount_given_in_month), 0
     end
   end
 end

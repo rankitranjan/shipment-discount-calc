@@ -3,6 +3,9 @@
 require_relative './shipment/transaction_tracker'
 require_relative './price/discount'
 
+# This is entry point of application where it opens the files
+# read line by line and call other services to get the reduced and discounted
+# rate and at the same time it alos hold transaction data.
 class Transaction
   attr_reader :transaction_tracker
 
@@ -20,6 +23,8 @@ class Transaction
       update_tracker(prices, line_values)
     end
   end
+
+  private
 
   def update_tracker(prices, line_values)
     return if prices.nil? || line_values.nil?

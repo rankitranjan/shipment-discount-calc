@@ -22,6 +22,8 @@ module Price
       end
     end
 
+    private
+
     # Calculates final discount
     def final_discount_price(discount_price, total)
       return DEFAULT_DISCOUNT if TOTAL_DISCOUNT_LIMIT == total

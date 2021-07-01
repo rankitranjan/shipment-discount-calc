@@ -24,6 +24,8 @@ module Shipment
       import.data
     end
 
+    private
+
     def parse
       parsed_data = []
       read_file.each do |line|

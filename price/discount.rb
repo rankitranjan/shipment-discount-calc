@@ -38,6 +38,8 @@ module Price
       end
     end
 
+    private
+
     def extract_values
       input.match(INPUT_PATTERN).captures
     end
