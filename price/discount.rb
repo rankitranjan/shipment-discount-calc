@@ -5,16 +5,16 @@ require_relative './price_calculator'
 require_relative '../lib/rule_sets'
 require_relative '../lib/output'
 
-# This module is responsible to provide discounted shipping charges and
-# outputs the each transaction to STDOUT
 module Price
+  # This module is responsible to provide discounted shipping charges and
+  # outputs the each transaction to STDOUT
   class Discount
     include RuleSets
     include Price::ShippingRate
     include Price::PriceCalculator
     include Output
 
-    INPUT_PATTERN = /^(^\d{4}-\d{2}-\d{2}) ([A-Z]+) ([A-Z]+)$/
+    INPUT_PATTERN = /^(^\d{4}-\d{2}-\d{2}) ([A-Z]+) ([A-Z]+)$/.freeze
 
     attr_reader :input, :transaction_tracker
 

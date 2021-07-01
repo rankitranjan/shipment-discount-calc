@@ -3,10 +3,12 @@
 require_relative '../lib/process_file'
 
 module Shipment
+  # This ShippingCharges moudle will help us to keep the data
+  # ready when we require to find the Shipping Charges for a provider
   class ShippingCharges
     include ProcessFile
     INPUT_FILE_PATH = './shipping_charges_data_set.txt'
-    PATTERN = /^([A-Z]+) ([A-Z]+) (\d+(\.\d{1,2})?){1}$/
+    PATTERN = /^([A-Z]+) ([A-Z]+) (\d+(\.\d{1,2})?){1}$/.freeze
 
     attr_reader :data
 
@@ -35,6 +37,7 @@ module Shipment
   end
 end
 
+# Thid ShippingChargesDate moudle holds the Shipping rates with provider
 class ShippingChargesDate
   attr_reader :provider, :size, :price
 

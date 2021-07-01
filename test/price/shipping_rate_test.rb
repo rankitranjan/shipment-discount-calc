@@ -21,7 +21,9 @@ module Price
     end
 
     def test_shipping_rate
-      expected_shipping_rate = @shipping_charges.select { |record| record.provider == PROVIDER && record.size == SIZE }.last&.price
+      expected_shipping_rate = @shipping_charges.select do |record|
+        record.provider == PROVIDER && record.size == SIZE
+      end.last&.price
 
       assert_equal shipping_rate(PROVIDER, SIZE), expected_shipping_rate
     end

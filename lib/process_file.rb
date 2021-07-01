@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
+# This ProcessFile module keeps the helper methods of file.
 module ProcessFile
-  def read_file(path=nil)
+  def read_file(path = nil)
     File.open(path || self.class::INPUT_FILE_PATH)
   end
 

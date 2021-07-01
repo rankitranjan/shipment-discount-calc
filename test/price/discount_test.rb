@@ -26,7 +26,7 @@ module Price
 
     def test_extract_values
       discount = Price::Discount.new('2015-02-01 S MR', [])
-      expected_values = ["2015-02-01", "S", "MR"]
+      expected_values = %w[2015-02-01 S MR]
       extracted_values = discount.extract_values
 
       assert_equal extracted_values, expected_values
@@ -41,7 +41,7 @@ module Price
       discount = Price::Discount.new('some random text', [])
       refute discount.valid?
     end
-    
+
     def test_apply_rules_get_discount_price_when_size_s_and_provider_mr
       discount = Price::Discount.new('2015-02-01 S MR', [])
       discount_price = discount.apply_rules_and_get_discount_price
@@ -50,8 +50,10 @@ module Price
 
       discount = Price::Discount.new('2015-02-01 S MR', [])
       discount_price = discount.apply_rules_and_get_discount_price
+
+      assert_equal discount_price, 0.5
     end
-    
+
     def test_apply_rules_get_discount_price_when_size_l_and_provider_lp
       discount = Price::Discount.new('2015-02-09 L LP', [])
       discount_price = discount.apply_rules_and_get_discount_price.to_i

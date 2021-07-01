@@ -5,7 +5,6 @@ require_relative '../../shipment/shipping_charges'
 
 module Shipment
   class ShippingChargesTest < Minitest::Test
-
     def subject
       Shipment::ShippingCharges
     end
@@ -13,7 +12,7 @@ module Shipment
     def test_check_if_file_exists
       assert File.exist?(subject::INPUT_FILE_PATH)
     end
-      
+
     def test_check_if_file_type
       assert_equal File.extname(subject::INPUT_FILE_PATH), '.txt'
     end
@@ -33,12 +32,12 @@ module Shipment
       end
     end
 
-    def validate_shipping_charges_object(d)
-      assert d.is_a?(ShippingChargesDate)
-      assert d.respond_to? :price
-      assert d.respond_to? :provider
-      assert d.respond_to? :size
-      assert_equal d.price.class, Float
+    def validate_shipping_charges_object(data)
+      assert data.is_a?(ShippingChargesDate)
+      assert data.respond_to? :price
+      assert data.respond_to? :provider
+      assert data.respond_to? :size
+      assert_equal data.price.class, Float
     end
   end
 end

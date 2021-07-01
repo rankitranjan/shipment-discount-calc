@@ -1,11 +1,14 @@
 # frozen_string_literal: true
 
 module Price
+  # This PriceCalculator module is important module, where it will help
+  # to calucate or validate the discount price and reduced price.
   module PriceCalculator
     TOTAL_DISCOUNT_LIMIT = 10
     DEFAULT_DISCOUNT = 0.0
 
-    def calculate_price(discount_price) # Calculates and validate the discount to be given
+    # Calculates and validate the discount to be given
+    def calculate_price(discount_price)
       _, size, provider = extract_values
       shipping_price = shipping_rate(provider, size)
       total = total_discount_given_in_month
@@ -19,7 +22,8 @@ module Price
       end
     end
 
-    def final_discount_price(discount_price, total) # Calculates final discount
+    # Calculates final discount
+    def final_discount_price(discount_price, total)
       return DEFAULT_DISCOUNT if TOTAL_DISCOUNT_LIMIT == total
 
       remaining_limit = (TOTAL_DISCOUNT_LIMIT - total).round(2)

@@ -2,12 +2,14 @@
 
 require 'logger'
 
+# Response for display it accepts message input and
+# display on terminal as output.
 module Output
   def display(message)
     @logger ||= Logger.new($stdout)
     @logger.formatter = proc { |_, _, _, msg| "#{msg}\n" }
     @logger.info(message)
-    return message
+    message
   end
 
   def dispaly_output(input, output)

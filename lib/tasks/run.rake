@@ -7,7 +7,7 @@ task :run do
   desc 'run transaction to parse the input file'
   file = ARGV[1..-1][0]
   abort('Args Error: Provide input file to process') if file.nil?
-  abort('File not found') if !File.file?(file)
+  abort('File not found') unless File.file?(file)
   ReadInputFile.start(file)
 end
 

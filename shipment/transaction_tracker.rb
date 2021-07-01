@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 module Shipment
+  # Store the data related to Transaction.
+  # Which helps to validate the limits of discount which is going
+  # and many more
   class TransactionTrackerData
     attr_reader :date, :provider, :size, :reduced_shipment_price, :shipment_discount
 

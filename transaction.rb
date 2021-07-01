@@ -4,7 +4,6 @@ require_relative './shipment/transaction_tracker'
 require_relative './price/discount'
 
 class Transaction
-
   attr_reader :transaction_tracker
 
   def self.start(file)

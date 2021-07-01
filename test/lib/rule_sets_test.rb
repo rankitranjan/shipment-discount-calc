@@ -8,8 +8,8 @@ class RuleSetTest < Minitest::Test
   include RuleSets
   include ProcessFile
   include Price::ShippingRate
-  
-  PATTERN = /^(^\d{4}-\d{2}-\d{2}) ([A-Z]+) ([A-Z]+)$/
+
+  PATTERN = /^(^\d{4}-\d{2}-\d{2}) ([A-Z]+) ([A-Z]+)$/.freeze
 
   def test_small
     assert small(10, 5)
@@ -28,34 +28,19 @@ class RuleSetTest < Minitest::Test
 
   def test_large_lp
     tracker_data
-    service = call_service("2015-02-01 S MR")
-    date, size, provider = extract_values(service.input)
-    shipping_price = shipping_rate(provider, size)
-    large_lp_free = service.large_lp(shipping_price, extract_values(service.input), service.transaction_tracker.flatten)
 
-    refute large_lp_free
+    service_large_lp = call_service('2015-02-01 S MR')
+    refute service_large_lp
 
-    service = call_service("2015-02-03 L LP")
-    date, size, provider = extract_values(service.input)
-    shipping_price = shipping_rate(provider, size)
-    large_lp_free = service.large_lp(shipping_price, extract_values(service.input), service.transaction_tracker.flatten)
+    service_large_lp = call_service('2015-02-03 L LP')
+    refute service_large_lp
 
-    refute large_lp_free
+    service_large_lp = call_service('2015-02-03 L LP')
+    refute service_large_lp
 
-    service = call_service("2015-02-03 L LP")
-    date, size, provider = extract_values(service.input)
-    shipping_price = shipping_rate(provider, size)
-    large_lp_free = service.large_lp(shipping_price, extract_values(service.input), service.transaction_tracker.flatten)
-
-    refute large_lp_free
-
-    service = call_service("2015-02-03 L LP")
-    date, size, provider = extract_values(service.input)
-    shipping_price = shipping_rate(provider, size)
-    large_lp_free = service.large_lp(shipping_price, extract_values(service.input), service.transaction_tracker.flatten)
-
-    assert large_lp_free
-    assert_equal large_lp_free, 6.90
+    service_large_lp = call_service('2015-02-03 L LP')
+    assert service_large_lp
+    assert_equal service_large_lp, 6.90
   end
 
   def update_tracker_data(prices, input)
@@ -66,6 +51,8 @@ class RuleSetTest < Minitest::Test
     pd = Price::Discount.new(line, @tracker_data.flatten)
     prices, input = pd.run
     update_tracker_data(prices, input)
-    pd
+    _date, size, provider = extract_values(pd.input)
+    shipping_price = shipping_rate(provider, size)
+    pd.large_lp(shipping_price, extract_values(pd.input), pd.transaction_tracker.flatten)
   end
 end
